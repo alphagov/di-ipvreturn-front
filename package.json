@@ -1,7 +1,7 @@
 {
-  "name": "di-ipv-cri-f2f-front",
+  "name": "di-ipvreturn-front",
   "version": "0.0.1",
-  "description": "User interface for the Face-To-Face (F2F) part of the Identity Proofing and Verification (IPV) system within the GDS digital identity platform, GOV.UK Sign In.",
+  "description": "User interface for the Identity Proving Return (IPR) part of the Identity Proofing and Verification (IPV) system within the GDS digital identity platform, GOV.UK Sign In.",
   "main": "src/server.js",
   "engines": {
     "node": "16.*",
@@ -37,7 +37,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alphagov/di-ipv-cri-f2f-front.git"
+    "url": "git+https://github.com/alphagov/di-ipvreturn-front.git"
   },
   "author": "",
   "license": "MIT",

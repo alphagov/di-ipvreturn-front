@@ -1,0 +1,33 @@
+{% extends "base-form.njk" %}
+
+{# the content for this page is controlled by locales/en/default.yml #}
+{% set hmpoTitle = landingPage.pageTitle %}
+{% set hmpoPageKey = "landingPage" %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+{% from "govuk/components/header/macro.njk" import govukHeader %}
+
+{% block header %}
+  {{ govukHeader ({
+    serviceName: translate("govuk.serviceName")
+  }) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-three-quarters">
+
+    <h1 class="govuk-heading-xl">{{ "landingPage.title" | translate }}</h1>
+
+    <h2 class="govuk-heading-m">{{ "landingPage.body" | translate }}</h2>
+
+    {% call hmpoForm(ctx, {attributes: {onsubmit: 'window.disableFormSubmit()'} }) %}
+    {% block submitButton %}
+      {{ hmpoSubmit(ctx, {id: "continue", text: translate("buttons.next")}) }}
+    {% endblock %}
+    {% endcall %}
+  </div>
+</div>
+
+{% include "common/confirmIdentityAnotherWay.html" %}
+
+{% endblock %}

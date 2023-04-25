@@ -10,12 +10,12 @@ const setHeaders = commonExpress.lib.headers;
 const setScenarioHeaders = commonExpress.lib.scenarioHeaders;
 const setAxiosDefaults = commonExpress.lib.axios;
 
-const { setAPIConfig, setProxyAPIConfig, setOAuthPaths } = require("./lib/settings");
+const { setAPIConfig, setOAuthPaths } = require("./lib/settings");
 const { setGTM } = require("di-ipv-cri-common-express/src/lib/settings");
 const { getGTM } = require("di-ipv-cri-common-express/src/lib/locals");
 const { setI18n } = require("di-ipv-cri-common-express/src/lib/i18next");
-const steps = require("./app/f2f/steps");
-const fields = require("./app/f2f/fields");
+const steps = require("./app/ipvreturn/steps");
+const fields = require("./app/ipvreturn/fields");
 
 const {
   API,
@@ -24,7 +24,6 @@ const {
   SESSION_SECRET,
   SESSION_TABLE_NAME,
   SESSION_TTL,
-  PROXY_API,
 } = require("./lib/config");
 
 const { setup } = require("hmpo-app");
@@ -106,12 +105,6 @@ setAPIConfig({
   authorizationPath: API.PATHS.AUTHORIZATION,
 });
 
-setProxyAPIConfig({
-  app,
-  baseUrl: PROXY_API.BASE_URL,
-  postOfficeProxyUrl: PROXY_API.PATHS.POST_OFFICE
-});
-
 setOAuthPaths({ app, entryPointPath: APP.PATHS.F2F });
 
 setGTM({
@@ -128,9 +121,9 @@ router.use(setAxiosDefaults);
 router.use("/oauth2", commonExpress.routes.oauth2);
 
 const wizardOptions = {
-  name: "cri-f2f-front",
-  journeyName: "f2f",
-  templatePath: "f2f",
+  name: "ipvreturn-front",
+  journeyName: "ipvreturn",
+  templatePath: "ipvreturn",
 };
 
 router.use(wizard(steps, fields, wizardOptions));
