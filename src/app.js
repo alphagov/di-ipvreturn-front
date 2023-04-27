@@ -2,7 +2,6 @@ const path = require("path");
 const session = require("express-session");
 const AWS = require("aws-sdk");
 const DynamoDBStore = require("connect-dynamodb")(session);
-const wizard = require('hmpo-form-wizard');
 
 const commonExpress = require("di-ipv-cri-common-express");
 
@@ -14,8 +13,6 @@ const { setAPIConfig, setOAuthPaths } = require("./lib/settings");
 const { setGTM } = require("di-ipv-cri-common-express/src/lib/settings");
 const { getGTM } = require("di-ipv-cri-common-express/src/lib/locals");
 const { setI18n } = require("di-ipv-cri-common-express/src/lib/i18next");
-const steps = require("./app/ipvreturn/steps");
-const fields = require("./app/ipvreturn/fields");
 
 const {
   API,
@@ -119,13 +116,5 @@ router.use(setScenarioHeaders);
 router.use(setAxiosDefaults);
 
 router.use("/oauth2", commonExpress.routes.oauth2);
-
-const wizardOptions = {
-  name: "ipvreturn-front",
-  journeyName: "ipvreturn",
-  templatePath: "ipvreturn",
-};
-
-router.use(wizard(steps, fields, wizardOptions));
 
 router.use(commonExpress.lib.errorHandling.redirectAsErrorToCallback);
